@@ -19,6 +19,7 @@ from src.api.routers import (
     settings,
     solve,
     system,
+    trends,
 )
 from src.core.logging import get_logger
 
@@ -82,6 +83,7 @@ app.include_router(settings.router, prefix="/api/v1/settings", tags=["settings"]
 app.include_router(system.router, prefix="/api/v1/system", tags=["system"])
 app.include_router(news.router, prefix="/api/v1/news", tags=["news"])
 app.include_router(fact_check.router, prefix="/api/v1/fact_check", tags=["fact_check"])
+app.include_router(trends.router, prefix="/api/v1/trends", tags=["trends"])
 
 
 @app.get("/")
