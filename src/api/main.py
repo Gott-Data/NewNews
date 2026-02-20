@@ -11,6 +11,7 @@ from src.api.routers import (
     guide,
     ideagen,
     knowledge,
+    news,
     notebook,
     question,
     research,
@@ -78,6 +79,7 @@ app.include_router(guide.router, prefix="/api/v1/guide", tags=["guide"])
 app.include_router(ideagen.router, prefix="/api/v1/ideagen", tags=["ideagen"])
 app.include_router(settings.router, prefix="/api/v1/settings", tags=["settings"])
 app.include_router(system.router, prefix="/api/v1/system", tags=["system"])
+app.include_router(news.router, prefix="/api/v1/news", tags=["news"])
 
 
 @app.get("/")

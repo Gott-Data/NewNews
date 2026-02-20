@@ -52,3 +52,31 @@ co_writer:
 narrator:
   temperature: 0.7
   max_tokens: 4000
+
+# =============================================================================
+# News Platform Modules
+# =============================================================================
+
+# News Aggregator Module - News collection and processing agents
+# Agents: news_scraper_agent, content_parser_agent, deduplication_agent, category_agent
+news_aggregator:
+  temperature: 0.3
+  max_tokens: 4096
+
+# Fact Checker Module - Claim verification and bias detection agents
+# Agents: claim_extractor_agent, evidence_gather_agent, verification_agent, credibility_score_agent, bias_detector_agent
+fact_checker:
+  temperature: 0.4
+  max_tokens: 8192
+
+# Trend Analyzer Module - Trend detection and analysis agents
+# Agents: trend_detector_agent, sentiment_tracker_agent, novelty_evaluator_agent, predictive_agent
+trend_analyzer:
+  temperature: 0.5
+  max_tokens: 6144
+
+# Content Generator Module - Automated content creation agents
+# Agents: article_synthesis_agent, headline_generator_agent, image_generation_agent, visualization_agent
+content_generator:
+  temperature: 0.6
+  max_tokens: 8192

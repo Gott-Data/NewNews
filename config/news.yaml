@@ -1,0 +1,257 @@
+# News Platform Configuration
+# Architecture: File-based storage, Daily updates, Global/Multilingual
+
+news:
+  # Update schedule
+  update_frequency: daily
+  update_time: "06:00"  # UTC time for daily updates
+
+  # Geographic and language settings
+  geographic_focus: global
+  languages:
+    - en  # English
+    - es  # Spanish
+    - fr  # French
+    - de  # German
+    - zh  # Chinese
+    - ar  # Arabic
+    - pt  # Portuguese
+    - ja  # Japanese
+    - ru  # Russian
+
+  # News categories (all categories enabled)
+  categories:
+    - general
+    - business
+    - technology
+    - science
+    - health
+    - sports
+    - entertainment
+    - politics
+
+  # News API sources
+  sources:
+    newsapi:
+      enabled: true
+      api_key: ${NEWSAPI_KEY}
+      countries: [us, gb, ca, au, de, fr, es, it, jp, cn, br, in]  # Global coverage
+      page_size: 100
+      max_pages: 5
+
+    guardian:
+      enabled: true
+      api_key: ${GUARDIAN_API_KEY}
+      page_size: 50
+      max_pages: 10
+
+    gnews:
+      enabled: false  # Optional, can be enabled later
+      api_key: ${GNEWS_API_KEY}
+      max_results: 100
+
+    # RSS feeds from reputable sources
+    rss_feeds:
+      # Global English sources
+      - url: https://feeds.bbci.co.uk/news/rss.xml
+        name: BBC News
+        language: en
+        credibility_score: 0.95
+
+      - url: https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml
+        name: New York Times
+        language: en
+        credibility_score: 0.93
+
+      - url: https://www.theguardian.com/world/rss
+        name: The Guardian
+        language: en
+        credibility_score: 0.92
+
+      - url: https://feeds.reuters.com/reuters/topNews
+        name: Reuters
+        language: en
+        credibility_score: 0.96
+
+      - url: https://feeds.washingtonpost.com/rss/world
+        name: Washington Post
+        language: en
+        credibility_score: 0.91
+
+      # Technology sources
+      - url: https://www.wired.com/feed/rss
+        name: Wired
+        language: en
+        credibility_score: 0.88
+
+      - url: https://www.theverge.com/rss/index.xml
+        name: The Verge
+        language: en
+        credibility_score: 0.87
+
+      # Science sources
+      - url: https://www.nature.com/nature.rss
+        name: Nature News
+        language: en
+        credibility_score: 0.97
+
+      - url: https://www.sciencedaily.com/rss/all.xml
+        name: Science Daily
+        language: en
+        credibility_score: 0.90
+
+      # International sources (multilingual)
+      - url: https://www.lemonde.fr/rss/une.xml
+        name: Le Monde
+        language: fr
+        credibility_score: 0.92
+
+      - url: https://www.spiegel.de/schlagzeilen/tops/index.rss
+        name: Der Spiegel
+        language: de
+        credibility_score: 0.90
+
+      - url: https://elpais.com/rss/elpais/portada.xml
+        name: El País
+        language: es
+        credibility_score: 0.91
+
+  # Storage settings
+  storage:
+    base_dir: ./data/news
+    raw_articles_dir: ./data/news/raw
+    processed_articles_dir: ./data/news/processed
+    images_dir: ./data/news/generated_images
+    max_articles_per_source: 1000
+    cleanup_after_days: 30  # Archive old articles
+
+  # Deduplication settings
+  deduplication:
+    enabled: true
+    similarity_threshold: 0.85  # 85% similarity = duplicate
+    method: fuzzy  # fuzzy, embedding, or both
+
+  # Content processing
+  processing:
+    extract_entities: true
+    extract_keywords: true
+    generate_summary: true
+    detect_language: true
+
+# Fact-Checking Configuration
+fact_check:
+  # User-selectable presets
+  presets:
+    quick:
+      max_sources: 5
+      timeout_seconds: 10
+      min_confidence: 0.6
+      enable_web_search: true
+      enable_paper_search: false
+      enable_rag_search: true
+
+    thorough:
+      max_sources: 15
+      timeout_seconds: 60
+      min_confidence: 0.8
+      enable_web_search: true
+      enable_paper_search: true
+      enable_rag_search: true
+
+    deep:
+      max_sources: 25
+      timeout_seconds: 120
+      min_confidence: 0.85
+      enable_web_search: true
+      enable_paper_search: true
+      enable_rag_search: true
+
+  # Default preset
+  default_preset: quick
+
+  # Bias detection
+  bias_detection:
+    enabled: true
+    check_political_lean: true
+    check_emotional_tone: true
+    check_loaded_language: true
+
+  # Credibility scoring
+  credibility:
+    min_credible_score: 0.6
+    source_weight: 0.4
+    evidence_weight: 0.6
+
+# Content Generation Configuration
+content_generation:
+  # Image generation (Stability AI)
+  images:
+    provider: stability_ai
+    api_key: ${STABILITY_API_KEY}
+    model: stable-diffusion-xl-1024-v1-0
+    width: 1024
+    height: 1024
+    steps: 30
+    cfg_scale: 7
+    cache_enabled: true
+
+  # Article synthesis
+  articles:
+    auto_generate_summaries: true
+    min_sources_for_synthesis: 3
+    max_summary_length: 500  # words
+
+  # Visualization
+  visualizations:
+    enable_trend_charts: true
+    enable_sentiment_graphs: true
+    enable_knowledge_graphs: true
+
+# Trend Analysis Configuration
+trend_analysis:
+  # Time windows
+  time_windows:
+    - 1_day
+    - 7_days
+    - 30_days
+
+  # Trend detection
+  detection:
+    min_mentions: 5
+    growth_threshold: 0.25  # 25% growth to be "trending"
+    novelty_threshold: 0.6
+
+  # Sentiment tracking
+  sentiment:
+    enabled: true
+    models:
+      - vader  # Rule-based (fast)
+      - transformers  # ML-based (accurate)
+
+  # Topic clustering
+  clustering:
+    enabled: true
+    max_clusters: 20
+    min_cluster_size: 3
+
+# API Configuration
+api:
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 60
+    burst_size: 10
+
+  cache:
+    enabled: true
+    ttl_seconds: 300  # 5 minutes
+
+  pagination:
+    default_page_size: 20
+    max_page_size: 100
+
+# Logging
+logging:
+  level: INFO
+  file: ./data/logs/news.log
+  rotation: daily
+  retention_days: 30
