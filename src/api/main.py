@@ -8,6 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from src.api.routers import (
     co_writer,
     dashboard,
+    fact_check,
     guide,
     ideagen,
     knowledge,
@@ -80,6 +81,7 @@ app.include_router(ideagen.router, prefix="/api/v1/ideagen", tags=["ideagen"])
 app.include_router(settings.router, prefix="/api/v1/settings", tags=["settings"])
 app.include_router(system.router, prefix="/api/v1/system", tags=["system"])
 app.include_router(news.router, prefix="/api/v1/news", tags=["news"])
+app.include_router(fact_check.router, prefix="/api/v1/fact_check", tags=["fact_check"])
 
 
 @app.get("/")
