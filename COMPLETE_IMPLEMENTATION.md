@@ -1,4 +1,4 @@
-# 🎉 DeepTutorNews - Complete Implementation Guide
+# Original repo 🎉 DeepTutorNews - Complete Implementation Guide
 
 ## 📋 Table of Contents
 1. [Overview](#overview)
