@@ -1,4 +1,4 @@
-# AI News Platform Implementation Plan
+# Claude Changes - AI News Platform Implementation Plan
 ## Transforming DeepTutor into DeepTutorNews
 
 ---
