@@ -1,4 +1,4 @@
-# DeepTutorNews Vercel Deployment Guide
+# NewNews Vercel Deployment Guide
 
 ## Overview
 
